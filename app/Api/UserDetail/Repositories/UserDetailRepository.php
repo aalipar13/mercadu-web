@@ -48,4 +48,15 @@ class UserDetailRepository extends ResourceRepository
 
         return $result;
     }
+
+    /**
+     * Updates user reward points by user id
+     *
+     * @param $userId, $rewardPoints
+     * @return mixed
+     */
+    public function updateRewardPoints($userId, $rewardPoints)
+    {
+        return $this->model->where('user_id', $userId)->update(array('reward_points' => $rewardPoints));
+    }
 }
