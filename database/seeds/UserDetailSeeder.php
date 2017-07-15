@@ -40,5 +40,7 @@ class UserDetailSeeder extends Seeder
             'is_account_verified' => 'yes',
             'bank_account_number' => '101033520667'
         ]);
+
+        $this->command->info('User details seeded!');
     }
 }
