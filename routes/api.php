@@ -36,18 +36,36 @@ Route::group(['middlware' => 'cors'], function()
     Route::group(['namespace' => 'Api\Product\Controllers'], function()
     {
         Route::get('/home', ['as' => 'api.home', 'uses' => 'ProductController@index']);
+
+        Route::get('/product/{id}', ['as' => 'api.product.show', 'uses' => 'ProductController@show']);
     });
 
     // Search by Tag
     Route::group(['namespace' => 'Api\Tag\Controllers'], function()
     {
         Route::get('/tag', ['as' => 'api.tag', 'uses' => 'TagController@search']);
+
+        Route::get('/all-tag', ['as' => 'api.all-tag', 'uses' => 'TagController@index']);
     });
 
     // User Account Information
     Route::group(['namespace' => 'Api\UserDetail\Controllers'], function()
     {
         Route::get('/user/account-info/{id}', ['as' => 'api.user.account-info', 'uses' => 'UserDetailController@getAccountInfoById']);
+    });
+
+    // Cart
+    Route::group(['namespace' => 'Api\Cart\Controllers'], function()
+    {
+        Route::get('/cart', ['as' => 'api.cart.show', 'uses' => 'CartController@showCart']);
+        Route::post('/cart', ['as' => 'api.cart.store', 'uses' => 'CartController@storeCart']);
+        Route::delete('/cart', ['as' => 'api.cart.destroy', 'uses' => 'CartController@destroyCart']);
+    });
+
+    // Cart
+    Route::group(['namespace' => 'Api\Order\Controllers'], function()
+    {
+        Route::get('/checkout', ['as' => 'api.checkout', 'uses' => 'OrderController@checkout']);
     });
 
 });

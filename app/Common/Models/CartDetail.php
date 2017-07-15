@@ -3,11 +3,11 @@
 namespace App\Common\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CartDetail extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
 
     /**
     * The attributes that are mass assignable.
@@ -26,10 +26,10 @@ class CartDetail extends Model
      *
      * @var array
      */
-    protected $hidden = ['deleted_at'];
+    // protected $hidden = ['deleted_at'];
 
     // For soft delete
-    protected $dates = ['deleted_at'];
+    // protected $dates = ['deleted_at'];
 
     // RELATIONSHIPS
     /**
