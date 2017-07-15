@@ -25,10 +25,10 @@ class CartController extends ResourceController
      *
      * @return \Dingo\Api\Http\Response
      */
-    public function showCart()
+    public function showCart($userId)
     {
         #check if user has cart
-        return $this->success($this->service()->showCart());
+        return $this->success($this->service()->showCart($userId));
     }
 
     /**
@@ -37,11 +37,11 @@ class CartController extends ResourceController
      * @param CartRequest $request
      * @return \Dingo\Api\Http\Response
      */
-    public function storeCart(CartRequest $request)
+    public function storeCart(CartRequest $request, $userId)
     {
         $params = $request->only('product_id');
 
-        return $this->success($this->service()->storeCart($params));
+        return $this->success($this->service()->storeCart($params, $userId));
     }
 
     /**

@@ -45,8 +45,8 @@ class User extends Authenticatable
        }
     }
 
-    //RELATIONSHIPS
-
+    // RELATIONSHIPS
+ 
     /**
      * User has one UserDetail
      */

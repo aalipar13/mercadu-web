@@ -57,8 +57,8 @@ Route::group(['middlware' => 'cors'], function()
     // Cart
     Route::group(['namespace' => 'Api\Cart\Controllers'], function()
     {
-        Route::get('/cart', ['as' => 'api.cart.show', 'uses' => 'CartController@showCart']);
-        Route::post('/cart', ['as' => 'api.cart.store', 'uses' => 'CartController@storeCart']);
+        Route::get('/cart/{id}', ['as' => 'api.cart.show', 'uses' => 'CartController@showCart']);
+        Route::post('/cart/{id}', ['as' => 'api.cart.store', 'uses' => 'CartController@storeCart']);
         Route::delete('/cart', ['as' => 'api.cart.destroy', 'uses' => 'CartController@destroyCart']);
     });
 

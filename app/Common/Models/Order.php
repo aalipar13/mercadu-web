@@ -5,7 +5,6 @@ use App\Base\BaseModel;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
 class Order extends BaseModel
 {
     use SoftDeletes;

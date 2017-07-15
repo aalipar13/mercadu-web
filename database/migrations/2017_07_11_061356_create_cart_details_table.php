@@ -18,6 +18,9 @@ class CreateCartDetailsTable extends Migration
 
             $table->integer('cart_id')->unsigned();
             $table->integer('product_id')->unsigned();
+            $table->string('product_name')->nullable();
+            $table->string('product_photo')->nullable();
+            $table->double('product_price', 12, 2)->nullable();
             $table->timestamp('delivery_at')->nullable();
             $table->enum('insured', ['yes', 'no'])->default('no');
 

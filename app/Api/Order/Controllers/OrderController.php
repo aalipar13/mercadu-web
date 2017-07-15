@@ -20,6 +20,6 @@ class OrderController extends ResourceController
 
     public function checkout($userId)
     {
-        return $this->service()->checkout($userId);
+        return $this->success($this->service()->checkout($userId));
     }
 }

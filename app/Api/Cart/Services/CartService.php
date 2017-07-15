@@ -57,10 +57,10 @@ class CartService extends ResourceService
      *
      * @return array
      */
-    public function showCart()
+    public function showCart($userId)
     {
         #check if user has cart
-        $userId = Auth::guard('api')->id();
+        // $userId = Auth::guard('api')->id();
 
         $userCart = $this->repository()->fetchCartWithDetails($userId);
 
@@ -81,10 +81,10 @@ class CartService extends ResourceService
      * @param $params
      * @return array
      */
-    public function storeCart($params)
+    public function storeCart($params, $userId)
     {
         #check if user has cart
-        $userCart = $this->showCart();
+        $userCart = $this->showCart($userId);
 
         #see if item is still rented out
         $product = $this->productService()->getById($params['product_id']);
@@ -101,7 +101,12 @@ class CartService extends ResourceService
         // }
 
         try {
+
             $params['product_id'] = $product['id'];
+            $params['product_name'] = $product['name'];
+            $params['product_photo'] = $product['photo'];
+            $params['product_price'] = $product['sale_price'];
+
             $params['cart_id'] = $userCart['id'];
 
             // if($params['insured'] === null) {
@@ -130,9 +135,9 @@ class CartService extends ResourceService
     public function destroyCart($params)
     {
         #check if user has cart
-        $userId = Auth::guard('api')->id();
+        // $userId = Auth::guard('api')->id();
 
-        $userCart = $this->showCart();
+        $userCart = $this->showCart($userId);
 
         if(!$userCart) {
             throw new CartException(CartException::EMPTY_CART);

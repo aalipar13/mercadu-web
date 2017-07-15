@@ -65,6 +65,7 @@ class TagService extends ResourceService
         $result =[];
         $stores = [];
         $tags = [];
+        $i = 0;
 
         if (empty($data['q'])) {
             $data['q'] = '';
@@ -84,35 +85,36 @@ class TagService extends ResourceService
                     // store checking if in array
                     if (!(in_array($value['store_id'], $stores))) {
                         // push stores to array
-                        $result[$value['store_id']]['store']['id'] = $value['store_id'];
-                        $result[$value['store_id']]['store']['name'] = $value['store_name'];
-                        $result[$value['store_id']]['store']['slug'] = $value['store_slug'];
-                        $result[$value['store_id']]['store']['description'] = $value['store_description'];
+                        // $result[$value['store_id']]['store']['id'] = $value['store_id'];
+                        // $result[$value['store_id']]['store']['name'] = $value['store_name'];
+                        // $result[$value['store_id']]['store']['slug'] = $value['store_slug'];
+                        // $result[$value['store_id']]['store']['description'] = $value['store_description'];
                         
-                        $result[$value['store_id']]['store']['store_img'] = $value['store_img'];
+                        // $result[$value['store_id']]['store']['store_img'] = $value['store_img'];
                         
                         
                         
 
-                        $result[$value['store_id']]['store']['photos'] = $this->storePhotoService()->getPhotos($value['store_id']);
+                        // $result[$value['store_id']]['store']['photos'] = $this->storePhotoService()->getPhotos($value['store_id']);
                     }
 
                     // push tags to array
-                    $result[$value['store_id']]['tags'][$value['tag_id']]['id'] = $value['tag_id'];
-                    $result[$value['store_id']]['tags'][$value['tag_id']]['name'] = $value['tag_name'];
-                    $result[$value['store_id']]['tags'][$value['tag_id']]['slug'] = $value['tag_slug'];
-                    $result[$value['store_id']]['tags'][$value['tag_id']]['store_id'] = $value['tag_store_id'];
-                    $result[$value['store_id']]['tags'][$value['tag_id']]['count'] = count($perProduct);
+                    // $result[$value['store_id']]['tags']['id'] = $value['tag_id'];
+                    // $result[$value['store_id']]['tags']['name'] = $value['tag_name'];
+                    // $result[$value['store_id']]['tags']['slug'] = $value['tag_slug'];
+                    // $result[$value['store_id']]['tags']['store_id'] = $value['tag_store_id'];
+                    // $result[$value['store_id']]['tags']['count'] = count($perProduct);
 
 
                     // push products under tags
-                    $result[$value['store_id']]['tags'][$value['tag_id']]['products'][$value['product_id']]['id'] = $value['product_id'];
-                    $result[$value['store_id']]['tags'][$value['tag_id']]['products'][$value['product_id']]['name'] = $value['product_name'];
-                    $result[$value['store_id']]['tags'][$value['tag_id']]['products'][$value['product_id']]['description'] = $value['product_description'];
-                    $result[$value['store_id']]['tags'][$value['tag_id']]['products'][$value['product_id']]['sale_price'] = $value['product_sale_price'];
+                    $result['tags']['products'][$i]['id'] = $value['product_id'];
+                    $result['tags']['products'][$i]['name'] = $value['product_name'];
+                    $result['tags']['products'][$i]['description'] = $value['product_description'];
+                    $result['tags']['products'][$i]['sale_price'] = $value['product_sale_price'];
+                    $result['tags']['products'][$i]['photo'] = $value['product_photo'];
 
                     $stores[] = $value['store_id'];
-
+                    $i++;
                 }
             }
         }

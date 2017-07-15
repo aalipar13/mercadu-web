@@ -25,22 +25,22 @@ class CreateOrdersTable extends Migration
             $table->double('subtotal_discount', 15, 2)->default(0)->nullable();
             $table->double('shipping', 15, 2)->default(0)->nullable();
             $table->enum('status', ['pending_payment','pending_review','processed','completed','cancelled'])->default('pending_payment');
-            $table->string('first_name', 128);
-            $table->string('last_name', 128);
-            $table->string('email', 128);
-            $table->string('mobile', 32);
-            $table->string('billing_address_1', 128);
+            $table->string('first_name', 128)->nullable();
+            $table->string('last_name', 128)->nullable();
+            $table->string('email', 128)->nullable();
+            $table->string('mobile', 32)->nullable();
+            $table->string('billing_address_1', 128)->nullable();
             $table->string('billing_address_2', 128)->nullable();
-            $table->string('billing_state', 128);
-            $table->string('billing_zip_code', 64);
-            $table->string('billing_city', 64);
-            $table->string('billing_country', 64);
-            $table->string('shipping_address_1', 128);
+            $table->string('billing_state', 128)->nullable();
+            $table->string('billing_zip_code', 64)->nullable();
+            $table->string('billing_city', 64)->nullable();
+            $table->string('billing_country', 64)->nullable();
+            $table->string('shipping_address_1', 128)->nullable();
             $table->string('shipping_address_2', 128)->nullable();
-            $table->string('shipping_state', 128);
-            $table->string('shipping_zip_code', 64);
-            $table->string('shipping_city', 64);
-            $table->string('shipping_country', 64);
+            $table->string('shipping_state', 128)->nullable();
+            $table->string('shipping_zip_code', 64)->nullable();
+            $table->string('shipping_city', 64)->nullable();
+            $table->string('shipping_country', 64)->nullable();
 
             $table->integer('merchant_id')->unsigned();
 

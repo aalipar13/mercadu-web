@@ -10,5 +10,8 @@ use Auth;
 
 class OrderDetailService extends ResourceService
 {
-
+	public function repository()
+	{
+		return new OrderDetailRepository();
+	}
 }

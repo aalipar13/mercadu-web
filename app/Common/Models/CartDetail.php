@@ -16,6 +16,9 @@ class CartDetail extends BaseModel
     protected $fillable = [
        'cart_id',
        'product_id',
+       'product_name',
+       'product_photo',
+       'product_price',
        'delivery_at',
        'insured'
     ];

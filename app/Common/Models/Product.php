@@ -61,4 +61,12 @@ class Product extends BaseModel
     {
         return $this->belongsTo('App\Common\Models\Store');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cartDetail()
+    {
+        return $this->hasMany('App\Common\Models\CartDetail');
+    }
 }

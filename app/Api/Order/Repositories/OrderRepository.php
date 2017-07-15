@@ -17,13 +17,12 @@ class OrderRepository extends ResourceRepository
     }
 
     /**
-     * Fetch Order With OrderDetail
-     * 
-     * @param  $userId
+     * Fetch Order With Details
+     * @param  $orderId
      * @return mixed
      */
     public function fetchOrderWithDetails($orderId)
     {
-        return $this->model->where('id', $order)->with('details')->first();
+    	return $this->model->where('id', $orderId)->with('details')->first();
     }
 }
