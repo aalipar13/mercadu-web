@@ -29,7 +29,6 @@ class CreateProductsTable extends Migration
 
             $table->double('regular_price', 12, 2)->nullable();
             $table->double('sale_price', 12, 2)->nullable();
-
             $table->timestamp('sale_price_start_date_at')->nullable();
             $table->timestamp('sale_price_end_date_at')->nullable();
 

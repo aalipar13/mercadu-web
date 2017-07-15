@@ -15,7 +15,8 @@ class Order extends Model
     * @var array
     */
     protected $fillable = [
-        'user_id',
+        'customer_id',
+
         'total',
         'subtotal',
         'deposit',
@@ -38,7 +39,9 @@ class Order extends Model
         'shipping_state',
         'shipping_zip_code',
         'shipping_city',
-        'shipping_country'
+        'shipping_country',
+
+        'merchant_id'
     ];
 
     /**

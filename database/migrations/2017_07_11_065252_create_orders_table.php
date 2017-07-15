@@ -16,7 +16,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('user_id')->unsigned();
+            $table->integer('customer_id')->unsigned();
+
             $table->double('total', 15, 2)->default(0);
             $table->double('subtotal', 15, 2)->default(0);
             $table->double('deposit', 15, 2)->default(0);
@@ -40,12 +41,17 @@ class CreateOrdersTable extends Migration
             $table->string('shipping_zip_code', 64);
             $table->string('shipping_city', 64);
             $table->string('shipping_country', 64);
-            $table->integer('payment_id')->nullable();
+
+            $table->integer('merchant_id')->unsigned();
 
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('user_id')
+            $table->foreign('customer_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
+
+            $table->foreign('merchant_id')
                   ->references('id')->on('users')
                   ->onDelete('cascade');
         });
