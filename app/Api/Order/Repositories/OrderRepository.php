@@ -23,6 +23,6 @@ class OrderRepository extends ResourceRepository
      */
     public function fetchOrderWithDetails($orderId)
     {
-    	return $this->model->where('id', $orderId)->with('details')->first();
+    	return $this->model->where('id', $orderId)->with('details')->first()->toArray();
     }
 }

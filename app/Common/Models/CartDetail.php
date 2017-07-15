@@ -41,4 +41,12 @@ class CartDetail extends BaseModel
     {
         return $this->belongsTo('App\Common\Models\Product');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function cart()
+    {
+        return $this->belongsTo('App\Common\Models\Cart');
+    }    
 }

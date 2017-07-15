@@ -33,8 +33,15 @@ class CartDetailRepository extends ResourceRepository
      */
     public function fetchCartDetailByProductIdAndCartId($productId, $cartId)
     {
-        return $this->model->where('product_id', $productId)
+        $result = $this->model->where('product_id', $productId)
                            ->where('cart_id', $cartId)
                            ->first();
+
+        if (empty($result)) {
+            return $result;
+        }
+        else {
+            return $result->toArray();
+        }
     }
 }

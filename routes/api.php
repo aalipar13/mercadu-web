@@ -60,7 +60,7 @@ Route::group(['middlware' => 'cors'], function()
     {
         Route::get('/cart/{id}', ['as' => 'api.cart.show', 'uses' => 'CartController@showCart']);
         Route::post('/cart/{id}', ['as' => 'api.cart.store', 'uses' => 'CartController@storeCart']);
-        Route::delete('/cart', ['as' => 'api.cart.destroy', 'uses' => 'CartController@destroyCart']);
+        Route::delete('/cart/{id}/{productId}', ['as' => 'api.cart.destroy', 'uses' => 'CartController@destroyCart']);
     });
 
     // Cart

@@ -50,10 +50,10 @@ class CartController extends ResourceController
      * @param CartRequest $request
      * @return \Dingo\Api\Http\Response
      */
-    public function destroyCart(CartRequest $request)
+    public function destroyCart($userId, $productId)
     {
-        $params = $request->only('product_id');
+        // $params = $request->only('product_id');
 
-        return $this->success($this->service()->destroyCart($params));
+        return $this->success($this->service()->destroyCart($userId, $productId));
     }
 }

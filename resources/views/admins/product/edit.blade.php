@@ -74,7 +74,7 @@
                                 </span>
                             @endif
                             <label for="type" class="control-label">Product Type</label>
-                            {!! Form::select('type', ['simple' => 'Simple', 'group' => 'Group', 'external' => 'External', 'variable' => 'Variable'], $product['type'], ['class' => 'form-control', 'placeholder' => 'Type']) !!}
+                            {!! Form::select('type', ['simple' => 'Simple', 'group' => 'Group', 'external' => 'External', 'variable' => 'Variable', 'bid' => 'Bid'], $product['type'], ['class' => 'form-control', 'placeholder' => 'Type']) !!}
                         </div>
                     </div>
                 </div>

@@ -66,13 +66,13 @@ class CartService extends ResourceService
 
         if(!$userCart) {
             $userCartData = [
-                             'user_id' => $userId
+                             'user_id' => intval($userId)
                             ];
 
             $userCart = $this->create($userCartData);
         }
 
-        return $userCart;
+        return $userCart->toArray();
     }
 
     /**
@@ -132,7 +132,7 @@ class CartService extends ResourceService
      * @param CartRequest $request
      * @return \Dingo\Api\Http\Response
      */
-    public function destroyCart($params)
+    public function destroyCart($userId, $productId)
     {
         #check if user has cart
         // $userId = Auth::guard('api')->id();
@@ -143,11 +143,11 @@ class CartService extends ResourceService
             throw new CartException(CartException::EMPTY_CART);
         }
 
-        $userCartDetail = $this->cartDetailService()->getCartDetailsByProductIdAndCartId($params['product_id'], $userCart['id']);
+        $userCartDetail = $this->cartDetailService()->getCartDetailsByProductIdAndCartId($productId, $userCart['id']);
 
-        if(!$userCartDetail) {
-            throw new CartException(CartException::NOT_IN_CART);
-        }
+        // if(!$userCartDetail) {
+        //     throw new CartException(CartException::NOT_IN_CART);
+        // }
 
         if($this->cartDetailService()->delete($userCartDetail['id'])) {
             $result = $this->repository()->fetchCartByUserId($userCart['user_id']);

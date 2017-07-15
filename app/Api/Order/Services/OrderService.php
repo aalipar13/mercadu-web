@@ -5,6 +5,8 @@ use App\Api\Order\Repositories\OrderRepository;
 
 use App\Api\Cart\Services\CartService;
 
+use App\Api\CartDetail\Services\CartDetailService;
+
 use App\Api\OrderDetail\Services\OrderDetailService;
 
 use App\Modules\ArkCommerce\Product\Services\ProductService;
@@ -32,6 +34,14 @@ class OrderService extends ResourceService
     public function cartService()
     {
         return new CartService();
+    }
+
+    /**
+     * @return CartDetailService
+     */
+    public function cartDetailService()
+    {
+        return new CartDetailService();
     }
 
     /**
@@ -68,7 +78,7 @@ class OrderService extends ResourceService
 
         // $user = Auth::guard('api')->user()->toArray();
         // $userDetail = Auth::guard('api')->user()->userDetail->toArray();
-        $$userDetail = $this->userDetailService()->getByUserId($userId);
+        $userDetail = $this->userDetailService()->getByUserId($userId);
 
         $orderData = [
             'customer_id' => $userDetail['user_id'],
@@ -80,8 +90,8 @@ class OrderService extends ResourceService
          ];
 
 
-        foreach ($cartDetails['details'] as $details) {
-            $orderDetailData['product_id'] = $details['product_id'];
+        foreach ($cartDetails['details'] as $key => $details) {
+            $orderDetailData[$key]['product_id'] = $details['product_id'];
 
             $product = $this->productService()->getById($details['product_id']);
             $total[] = $product['regular_price'];
@@ -93,21 +103,34 @@ class OrderService extends ResourceService
 
         $orderResult = $this->repository->create($orderData);
 
-        $orderDetailData['order_id'] = $orderResult['id'];
-
-        for ($i=0; $i < count($orderDetailData); $i++) { 
-            $this->orderDetailService()->create($orderDetailData);
+        for ($i=0; $i < count($orderDetailData); $i++) {
+            $orderDetailData[$i]['order_id'] = $orderResult['id'];
+            $this->orderDetailService()->create($orderDetailData[$i]);
         }
 
-        $this->fundTransfer($userDetail['bank_account_number']);
+        // delete cart details
+        foreach ($cartDetails['details'] as $key => $details) {
+            $this->cartDetailService()->delete($details['id']);
+        }
 
-        return $this->repository()->fetchOrderWithDetails($orderResult['id']);
+        $this->fundTransfer($userDetail['bank_account_number'], $total);
+
+        $this->userDetailService()->updateRewardPoints($userId, $total);
+
+        $result = $this->repository()->fetchOrderWithDetails($orderResult['id']);
+
+        $result['reward_points'] = $total * 0.05;
+
+        return $result;
 
     }
 
-    public function fundTransfer($accountNo)
+    public function fundTransfer($accountNo, $total)
     {
         $curl = curl_init();
+
+        $random1 = str_random(20);
+        $random2 = str_random(20);
 
         curl_setopt_array($curl, array(
           CURLOPT_URL => "https://api-uat.unionbankph.com/uhac/sandbox/transfers/initiate",
@@ -117,12 +140,12 @@ class OrderService extends ResourceService
           CURLOPT_TIMEOUT => 30,
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => "POST",
-          CURLOPT_POSTFIELDS => "{\"channel_id\":\".str_random(20).\",\"transaction_id\":\".str_random(20).\",\"source_account\":\".$accountNo.\",\"source_currency\":\"PHP\",\"target_account\":\"101033520667\",\"target_currency\":\"PHP\",\"amount\":7}",
+          CURLOPT_POSTFIELDS => "{\"channel_id\":\".$random1.\",\"transaction_id\":\".$random2.\",\"source_account\":".$accountNo.",\"source_currency\":\"PHP\",\"target_account\":\"101033520667\",\"target_currency\":\"PHP\",\"amount\":".$total."}",
           CURLOPT_HTTPHEADER => array(
             "accept: application/json",
             "content-type: application/json",
-            "x-ibm-client-id: REPLACE_THIS_KEY",
-            "x-ibm-client-secret: REPLACE_THIS_KEY"
+            "x-ibm-client-id: 629b0fc0-f83c-4802-abd0-3ebc6bf11c19",
+            "x-ibm-client-secret: G3gN3hW0hR2hR6yA1aK1uN7aG5pW5wJ1cM7aM1oP8iI6eM7wD5"
           ),
         ));
 
@@ -132,9 +155,9 @@ class OrderService extends ResourceService
         curl_close($curl);
 
         if ($err) {
-          echo "cURL Error #:" . $err;
+          // echo "cURL Error #:" . $err;
         } else {
-          echo $response;
+          // echo $response;
         }
     }
 }
