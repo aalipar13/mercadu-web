@@ -1,16 +1,14 @@
 <?php namespace App\Modules\Registration\Services;
 
 
-use Resource\Services\ResourceService;
-
+use App\Api\UserDetail\Services\UserDetailService;
 use App\Modules\Registration\Repositories\RegistrationRepository;
 
-use App\Api\UserDetail\Services\UserDetailService;
+use Resource\Services\ResourceService;
 
 // use App\Http\Controllers\Email\Services\EmailService;
 
 use Auth;
-
 use Config;
 
 
@@ -39,6 +37,7 @@ class RegistrationService extends ResourceService
     // {
     //     return new EmailService();
     // }
+
 
     /**
      * Creates a new users record

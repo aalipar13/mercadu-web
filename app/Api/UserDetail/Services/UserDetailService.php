@@ -1,9 +1,10 @@
 <?php namespace App\Api\UserDetail\Services;
 
 
+use App\Api\UserDetail\Repositories\UserDetailRepository;
+
 use Resource\Services\ResourceService;
 
-use App\Api\UserDetail\Repositories\UserDetailRepository;
 
 class UserDetailService extends ResourceService
 {
