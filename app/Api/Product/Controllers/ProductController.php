@@ -40,18 +40,18 @@ class ProductController extends ResourceController
 
     /**
      * Retrieves all product data
-     * 
+     *
      * @param  BaseRequest $request
      * @return mixed
      */
     public function index(BaseRequest $request)
     {
         $records = $request->get('records');
- 
+
         if (empty($records))
         {
             $result['productList'] = $this->service->getAllWithStore();
-        } 
+        }
         else
         {
             $products = $this->service->allProductsWithPagination($records);
@@ -60,5 +60,15 @@ class ProductController extends ResourceController
         }
 
         return $this->success($result);
+    }
+
+    /**
+     * Retrieves all products for bidding
+     *
+     * @return mixed
+     */
+    public function getAllBiddingProducts()
+    {
+        return $this->success($this->service->getAllBiddingProducts());
     }
 }

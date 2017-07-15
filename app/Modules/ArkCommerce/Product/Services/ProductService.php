@@ -35,7 +35,7 @@ class ProductService extends ResourceService
 
     /**
      * Find the product using the id
-     * 
+     *
      * @param  $id
      * @return mixed
      */
@@ -46,7 +46,7 @@ class ProductService extends ResourceService
 
     /**
      * Create a new product record
-     * 
+     *
      * @param  $request
      * @return mixed
      */
@@ -78,10 +78,10 @@ class ProductService extends ResourceService
         if(!File::exists($DIRECTORIES['PRODUCT_PHOTO_FOLDER_PATH'])) {
             File::makeDirectory($DIRECTORIES['PRODUCT_PHOTO_FOLDER_PATH'], 0775, true);
         }
-        
+
         //move the photo
         $request->file('photo')->move($DIRECTORIES['PRODUCT_PHOTO_FOLDER_PATH'] . '/', $photoName);
-            
+
         //prepare the data
         $data['photo'] = $DIRECTORIES['PRODUCT_PHOTO_FOLDER'] . '/' . $photoName;
 
@@ -93,7 +93,7 @@ class ProductService extends ResourceService
 
     /**
      * Updates a product record by id
-     * 
+     *
      * @param  $id
      * @param  $request
      * @return mixed
@@ -115,16 +115,16 @@ class ProductService extends ResourceService
 
         //load directory constants
         $DIRECTORIES = Config::get('constants.directories');
-    
+
         if($request->file('photo')) {
 
             //get the image and create a new name
             $photoName = md5(uniqid(mt_rand(), true)) . '.' . $request->file('photo')->getClientOriginalExtension();
-            
+
             if(File::exists($DIRECTORIES['PRODUCT_PHOTO_FOLDER_PATH'])) {
                 //move the image
                 $request->file('photo')->move($DIRECTORIES['PRODUCT_PHOTO_FOLDER_PATH'] . '/', $photoName);
-                
+
                 //prepare the data
                 $data['photo'] = $DIRECTORIES['PRODUCT_PHOTO_FOLDER'] . '/' . $photoName;
             }
@@ -140,8 +140,18 @@ class ProductService extends ResourceService
     }
 
     /**
+     * Retrieves all products for bidding
+     *
+     * @return mixed
+     */
+    public function getAllBiddingProducts()
+    {
+        return $this->repository->getAllBiddingProducts();
+    }
+
+    /**
      * Get All Product With Store
-     * 
+     *
      * @return mixed
      */
     public function getAllWithStore()
@@ -151,7 +161,7 @@ class ProductService extends ResourceService
 
     /**
      * Get Product With Store by id
-     * 
+     *
      * @param  $id
      * @return mixed
      */
@@ -162,7 +172,7 @@ class ProductService extends ResourceService
 
     /**
      * Get Products for dropdown
-     * 
+     *
      * @return mixed
      */
     public function getProductsForDropdown()
@@ -172,7 +182,7 @@ class ProductService extends ResourceService
 
         /**
      * Get all products with pagination
-     * 
+     *
      * @param  $records
      * @return mixed
      */

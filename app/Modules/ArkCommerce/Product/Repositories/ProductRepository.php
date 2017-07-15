@@ -29,8 +29,18 @@ class ProductRepository extends ResourceRepository
     }
 
     /**
+     * Retrieves all products for bidding
+     *
+     * @return mixed
+     */
+    public function getAllBiddingProducts()
+    {
+        return $this->model->where('type', 'bid')->get()->toArray();
+    }
+
+    /**
      * Get Product And Store by id
-     * 
+     *
      * @param  $id
      * @return mixed
      */
@@ -51,7 +61,7 @@ class ProductRepository extends ResourceRepository
 
     /**
      * Get All Categories And Store
-     * 
+     *
      * @return mixed
      */
     public function getAllProductAndStore()
@@ -70,7 +80,7 @@ class ProductRepository extends ResourceRepository
 
     /**
      * Fetch Products using Store Id - dropdown list
-     * 
+     *
      * @param  $id
      * @return mixed
      */
