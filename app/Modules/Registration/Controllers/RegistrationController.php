@@ -31,7 +31,7 @@ class RegistrationController extends ResourceController
 
     /**
      * Store a new user record
-     * 
+     *
      * @param  RegistrationRequest $request
      * @return mixed
      */

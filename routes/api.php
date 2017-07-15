@@ -31,4 +31,10 @@ Route::group(['middlware' => 'cors'], function()
     {
         Route::post('/register', ['as' => 'api.register', 'uses' => 'RegistrationController@register']);
     });
+
+    // User Account Information
+    Route::group(['namespace' => 'Api\UserDetail\Controllers'], function()
+    {
+        Route::get('/user/account-info/{id}', ['as' => 'api.user.account-info', 'uses' => 'UserDetailController@getAccountInfoById']);
+    });
 });

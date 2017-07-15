@@ -14,7 +14,7 @@ class CustomerAuthRequest extends BaseRequest
     public function rules()
     {
        return [
-            'username' => 'required|max:50',
+            'username' => 'required|max:12',
             'password' => 'required|min:6'
        ];
     }

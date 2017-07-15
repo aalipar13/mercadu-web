@@ -42,14 +42,15 @@ class RegistrationService extends ResourceService
 
     /**
      * Creates a new users record
-     * 
+     *
      * @param  $data
-     * @return 
+     * @return
      */
     public function createUser($data)
     {
         $userData = [
                         'email' => $data['email'],
+                        'username' => $data['username'],
                         'password' => $data['password'],
                         'type' => $data['type'],
                     ];
@@ -57,10 +58,12 @@ class RegistrationService extends ResourceService
         $user = $this->repository()->create($userData);
 
         $userDetail = [
-                        'user_id' => $user['id'], 
-                        'first_name' => $data['first_name'], 
-                        'last_name' => $data['last_name'], 
-                        'mobile' => $data['mobile'], 
+                        'user_id' => $user['id'],
+                        'first_name' => $data['first_name'],
+                        'last_name' => $data['last_name'],
+                        'birth_date' => $data['birth_date'],
+                        'mobile' => $data['mobile'],
+                        'bank_account_number' => $data['bank_account_number'],
                       ];
 
         $userResult = $this->repository()->find($user['id']);

@@ -15,12 +15,15 @@ class RegistrationRequest extends BaseRequest
     {
         return [
             'email' => 'required|email|unique:users,email',
+            'username' => 'required|max:12|unique:users,username',
+            'password' => 'required|min:6',
+            'type' => 'required',
 
             'first_name' => 'required|max:50',
             'last_name' => 'required|max:50',
-            'mobile' => 'required|digits:10|unique:user_details',
             'birth_date' => 'required|date_format:Y-m-d',
-            'type' => 'required|in:customer, merchant, admin'
+            'mobile' => 'required|digits:10|unique:user_details',
+            'bank_account_number' => 'required'
         ];
     }
 }

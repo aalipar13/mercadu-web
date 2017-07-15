@@ -15,9 +15,10 @@ class UserDetailService extends ResourceService
         return new UserDetailRepository();
     }
 
+
     /**
      * Creates a new User Detail Record
-     * 
+     *
      * @param  $userDetail
      * @return mixed
      */
@@ -26,5 +27,16 @@ class UserDetailService extends ResourceService
         $result = $this->repository()->create($userDetail);
 
         return $this->repository()->find($result['id']);
+    }
+
+    /**
+     * Retrieves user account information by id
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getAccountInfoById($id)
+    {
+        return $this->repository->getAccountInfoById($id);
     }
 }
