@@ -14,6 +14,15 @@ class UserDetailSeeder extends Seeder
     public function run()
     {
         UserDetail::create([
+            'user_id' => 1,
+            'first_name' => 'Administrato',
+            'last_name' => 'Administrator',
+            'mobile' => '0900000000',
+            'is_account_verified' => 'yes',
+            'bank_account_number' => '102070061111'
+        ]);
+
+        UserDetail::create([
             'user_id' => 2,
             'first_name' => 'Customer',
             'last_name' => 'Customer',
@@ -29,7 +38,7 @@ class UserDetailSeeder extends Seeder
             'last_name' => 'Merchant',
             'mobile' => '0944444444',
             'is_account_verified' => 'yes',
-            'bank_account_number' => '102070061678'
+            'bank_account_number' => '101033520667'
         ]);
     }
 }
