@@ -16,7 +16,6 @@ class Order extends Model
     */
     protected $fillable = [
         'customer_id',
-
         'total',
         'subtotal',
         'deposit',
@@ -40,7 +39,6 @@ class Order extends Model
         'shipping_zip_code',
         'shipping_city',
         'shipping_country',
-
         'merchant_id'
     ];
 
@@ -61,5 +59,13 @@ class Order extends Model
     public function details()
     {
         return $this->hasMany('App\Common\Models\OrderDetail');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

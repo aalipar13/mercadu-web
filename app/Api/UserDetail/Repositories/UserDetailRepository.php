@@ -31,6 +31,20 @@ class UserDetailRepository extends ResourceRepository
                     ->first()->toArray();
     }
 
+     /**
+     * Retrieves user details by user id
+     *
+     * @param $userId
+     * @return mixed
+     */
+    public function getByUserId($userId)
+    {
+        return $this->model->select('users.email', 'user_details.*')
+                    ->where('user_details.user_id', $userId)
+                    ->join('users', 'user_details.user_id', '=', 'users.id')
+                    ->first()->toArray();
+    }
+
     /**
      * Search UserDetails based on keywords
      *

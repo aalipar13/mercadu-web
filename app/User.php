@@ -54,4 +54,12 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Common\Models\UserDetail');
     }
+
+    /**
+     * User has many Order
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Common\Models\Order');
+    }
 }

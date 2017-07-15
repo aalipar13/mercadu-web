@@ -65,7 +65,7 @@ Route::group(['middlware' => 'cors'], function()
     // Cart
     Route::group(['namespace' => 'Api\Order\Controllers'], function()
     {
-        Route::get('/checkout', ['as' => 'api.checkout', 'uses' => 'OrderController@checkout']);
+        Route::post('/checkout/{user_id}', ['as' => 'api.checkout', 'uses' => 'OrderController@checkout']);
     });
 
 });

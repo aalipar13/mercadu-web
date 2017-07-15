@@ -76,6 +76,18 @@ class UserDetailService extends ResourceService
         }
     }
 
+
+    /**
+     * Retrieves user details by user id
+     *
+     * @param $userId
+     * @return mixed
+     */
+    public function getByUserId($userId)
+    {
+        return $this->repository->getByUserId($userId);
+    }
+
     /**
      * Updates user reward points by user id
      *
