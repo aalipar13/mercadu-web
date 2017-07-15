@@ -71,8 +71,21 @@ class UserDetailService extends ResourceService
         {
             $info = json_decode($response);
             $accountInfo['bank_account_info'] = $info;
-            
+
             return $accountInfo;
         }
+    }
+
+    /**
+     * Updates user reward points by user id
+     *
+     * @param $userId, $amount
+     * @return mixed
+     */
+    public function updateRewardPoints($userId, $amount)
+    {
+        $rewardPoints = $amount * 0.05;
+
+        return $this->repository->updateRewardPoints($userId, $rewardPoints);
     }
 }
