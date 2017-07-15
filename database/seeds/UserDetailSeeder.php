@@ -15,7 +15,7 @@ class UserDetailSeeder extends Seeder
     {
         UserDetail::create([
             'user_id' => 1,
-            'first_name' => 'Administrato',
+            'first_name' => 'Administrator',
             'last_name' => 'Administrator',
             'mobile' => '0900000000',
             'is_account_verified' => 'yes',
