@@ -24,7 +24,7 @@ class CreateUserDetailsTable extends Migration
             $table->enum('is_account_verified', ['yes', 'no']);
 
             $table->string('bank_account_number')->unique();
-            $table->decimal('reward_points', 8, 2);
+            $table->decimal('reward_points', 8, 2)->default(0);
 
             $table->softDeletes();
             $table->timestamps();

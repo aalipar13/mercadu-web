@@ -15,9 +15,24 @@ class UserDetailRepository extends ResourceRepository
         return UserDetail::class;
     }
 
+
+    /**
+     * Retrieves user account information by id
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getAccountInfoById($id)
+    {
+        return $this->model->select('users.email', 'users.username', 'users.type', 'user_details.*')
+                    ->where('users.id', $id)
+                    ->join('users', 'user_details.user_id', '=', 'users.id')
+                    ->get()->toArray();
+    }
+
     /**
      * Search UserDetails based on keywords
-     * 
+     *
      * @param  $keywords
      * @return mixed
      */
