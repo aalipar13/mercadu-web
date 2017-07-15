@@ -49,5 +49,5 @@ Route::group(['middlware' => 'cors'], function()
     {
         Route::get('/user/account-info/{id}', ['as' => 'api.user.account-info', 'uses' => 'UserDetailController@getAccountInfoById']);
     });
-    
+
 });

@@ -40,4 +40,5 @@ class UserDetailController extends ResourceController
     {
         return $this->success($this->service->getAccountInfoById($id));
     }
+    
 }

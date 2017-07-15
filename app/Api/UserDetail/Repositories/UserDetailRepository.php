@@ -28,7 +28,7 @@ class UserDetailRepository extends ResourceRepository
         return $this->model->select('users.email', 'users.username', 'users.type', 'user_details.*')
                     ->where('users.id', $id)
                     ->join('users', 'user_details.user_id', '=', 'users.id')
-                    ->get()->toArray();
+                    ->first()->toArray();
     }
 
     /**
