@@ -1,25 +1,21 @@
-<?php namespace App\Common\Models;
+<?php
 
+namespace App\Common\Models;
 
-use App\Base\BaseModel;
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class Tag extends BaseModel
+class Cart extends Model
 {
     use SoftDeletes;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    * The attributes that are mass assignable.
+    *
+    * @var array
+    */
     protected $fillable = [
-        'store_id',
-        'name',
-        'slug',
-        'description'
+        'user_id'
     ];
 
     /**
@@ -34,10 +30,10 @@ class Tag extends BaseModel
 
     // RELATIONSHIPS
     /**
-     * Tag belongs to a Store
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function store()
+    public function details()
     {
-        return $this->belongsTo('App\Common\Models\Store');
+        return $this->hasMany('App\Common\Models\CartDetail');
     }
 }

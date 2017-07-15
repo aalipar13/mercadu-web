@@ -15,11 +15,21 @@ class CreateCartDetailsTable extends Migration
     {
         Schema::create('cart_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cart_id');
-            $table->integer('product_id');
+
+            $table->integer('cart_id')->unsigned();
+            $table->integer('product_id')->unsigned();
             $table->timestamp('delivery_at')->nullable();
             $table->enum('insured', ['yes', 'no'])->default('no');
+
             $table->timestamps();
+
+            $table->foreign('cart_id')
+                  ->references('id')->on('carts')
+                  ->onDelete('cascade');
+
+            $table->foreign('product_id')
+                ->references('id')->on('products')
+                ->onDelete('cascade');
         });
     }
 

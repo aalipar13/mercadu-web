@@ -20,6 +20,9 @@ class CreateTagMappingsTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->integer('tag_id')->unsigned();
 
+            $table->softDeletes();
+            $table->timestamps();
+
             $table->foreign('store_id')
                   ->references('id')->on('stores')
                   ->onDelete('cascade');
@@ -28,13 +31,9 @@ class CreateTagMappingsTable extends Migration
                   ->references('id')->on('products')
                   ->onDelete('cascade');
 
-
             $table->foreign('tag_id')
                   ->references('id')->on('tags')
                   ->onDelete('cascade');
-
-            $table->softDeletes();
-            $table->timestamps();
         });
     }
 

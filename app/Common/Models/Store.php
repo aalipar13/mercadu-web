@@ -12,25 +12,7 @@ class Store extends BaseModel
 {
     use SoftDeletes, CascadeDelete;
 
-    protected $id = 'id';
-
-    protected $name = 'name';
-
-    protected $slug = 'slug';
-
-    protected $description = 'description';
-
-    protected $order_notice = 'order_notice';
-
-    protected $store_img = 'store_img';
-
-    protected $delivery = 'delivery';
-
-    protected $min_orders = 'min_orders';
-
-    protected $budget = 'budget';
-
-    //cascading delete
+    // For cascading delete
     protected $cascadeDeletes = ['tag', 'category', 'product', 'storePhoto'];
 
     /**
@@ -39,14 +21,28 @@ class Store extends BaseModel
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'description', 'order_notice', 'store_img', 'delivery', 'min_orders', 'budget'
+        'user_id',
+        'name',
+        'slug',
+        'description',
+        'order_notice',
+        'store_img',
+        'delivery',
+        'min_orders',
+        'budget'
     ];
 
-    //for soft delete
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['deleted_at'];
+
+    // For soft delete
     protected $dates = ['deleted_at'];
 
     // RELATIONSHIPS
-
     /**
      * Store has many Tags
      */

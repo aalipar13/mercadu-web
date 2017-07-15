@@ -10,29 +10,28 @@ class TagMapping extends BaseModel
 {
     use SoftDeletes;
 
-    protected $id = 'id';
-
-    protected $store_id = 'store_id';
-
-    protected $product_id = 'product_id';
-
-    protected $tag_id = 'tag_id';
-
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'store_id', 'product_id', 'tag_id'
+        'store_id',
+        'product_id',
+        'tag_id'
     ];
 
-    //for soft delete
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['deleted_at'];
+
+    // For soft delete
     protected $dates = ['deleted_at'];
 
-    //RELATIONSHIPS
-
+    // RELATIONSHIPS
     /**
      * Tag Mapping belongs to Store
      */

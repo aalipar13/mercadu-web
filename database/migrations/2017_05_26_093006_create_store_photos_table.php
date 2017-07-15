@@ -15,11 +15,16 @@ class CreateStorePhotosTable extends Migration
     {
         Schema::create('store_photos', function (Blueprint $table) {
             $table->increments('id');
+
             $table->integer('store_id')->unsigned();
             $table->string('photo');
 
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('store_id')
+                  ->references('id')->on('stores')
+                  ->onDelete('cascade');
         });
     }
 

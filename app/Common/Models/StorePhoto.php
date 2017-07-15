@@ -10,27 +10,27 @@ class StorePhoto extends BaseModel
 {
     use SoftDeletes;
 
-    protected $id = 'id';
-
-    protected $store_id = 'store_id';
-
-    protected $photo = 'photo';
-
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'store_id', 'photo'
+        'store_id',
+        'photo'
     ];
 
-    //for soft delete
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['deleted_at'];
+
+    // For soft delete
     protected $dates = ['deleted_at'];
 
     // RELATIONSHIPS
-
     /**
      * StorePhoto belongs to Store
      */

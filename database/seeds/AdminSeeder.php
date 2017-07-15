@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Seeder;
-
 use App\User;
+
+use Illuminate\Database\Seeder;
 
 class AdminSeeder extends Seeder
 {
@@ -13,8 +13,8 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        User::create(['email' => 'admin@merkadu.ph',
-                      'password' => 'passw0rt',
+        User::create(['email' => 'admin@mercadu.ph',
+                      'password' => 'passw0rth',
                       'type' => 'admin']);
 
         $this->command->info('Admin seeded!');

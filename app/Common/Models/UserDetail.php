@@ -10,36 +10,33 @@ class UserDetail extends BaseModel
 {
     use SoftDeletes;
 
-    protected $id = 'id';
-
-    protected $user_id = 'user_id';
-
-    protected $first_name = 'first_name';
-
-    protected $last_name = 'last_name';
-
-    protected $birth_date = 'birth_date';
-
-    protected $mobile = 'mobile';
-
-    protected $is_account_verified = 'is_account_verified';
-
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id', 'first_name', 'last_name', 'birth_date', 'mobile', 'is_account_verified'
+        'user_id',
+        'first_name',
+        'last_name',
+        'birth_date',
+        'mobile',
+        'is_account_verified',
+        'bank_account_number',
+        'reward_points'
     ];
 
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = ['deleted_at'];
 
-    //for soft delete
+    // For soft delete
     protected $dates = ['deleted_at'];
 
-    //RELATIONSHIPS
-    
+    // RELATIONSHIPS
     /**
      * CustomerDetail belongs to User
      */
