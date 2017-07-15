@@ -38,6 +38,7 @@ Route::group(['middlware' => 'cors'], function()
         Route::get('/home', ['as' => 'api.home', 'uses' => 'ProductController@index']);
 
         Route::get('/product/{id}', ['as' => 'api.product.show', 'uses' => 'ProductController@show']);
+        Route::get('/bidding-products', ['as' => 'api.bidding-products', 'uses' => 'ProductController@getAllBiddingProducts']);
     });
 
     // Search by Tag
