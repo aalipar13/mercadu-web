@@ -1,5 +1,6 @@
 <?php namespace App\Api\Customer\Auth\Controllers;
 
+use App\Base\BaseController;
 
 use App\Api\Customer\Auth\Requests\CustomerAuthRequest;
 
@@ -14,7 +15,7 @@ use Auth;
 use Laravel\Passport\TokenRepository;
 
 
-class CustomerAuthController
+class CustomerAuthController extends BaseController
 {
     /**
      *  Authenticate the user customer

@@ -31,4 +31,19 @@ Route::group(['middlware' => 'cors'], function()
     {
         Route::post('/register', ['as' => 'api.register', 'uses' => 'RegistrationController@register']);
     });
+
+    // Product
+    Route::group(['namespace' => 'Api\Product\Controllers'], function()
+    {
+        Route::get('/home', ['as' => 'api.home', 'uses' => 'ProductController@index']);
+    });
+
+    // Search by Tag
+    Route::group(['namespace' => 'Api\Tag\Controllers'], function()
+    {
+
+        Route::get('/tag', ['as' => 'api.tag', 'uses' => 'TagController@search']);
+
+    });
 });
+

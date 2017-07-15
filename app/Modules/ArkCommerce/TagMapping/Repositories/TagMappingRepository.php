@@ -103,11 +103,11 @@ class TagMappingRepository extends ResourceRepository
                                 'stores.name as store_name',
                                 'stores.slug as store_slug',
                                 'stores.description as store_description',
-                                'stores.order_notice as store_order_notice',
+                                // 'stores.order_notice as store_order_notice',
                                 'stores.store_img as store_img',
-                                'stores.min_orders as store_min_orders',
-                                'stores.delivery as store_delivery',
-                                'stores.budget as store_budget',
+                                // 'stores.min_orders as store_min_orders',
+                                // 'stores.delivery as store_delivery',
+                                // 'stores.budget as store_budget',
                                 // 'store_photos.id as store_photo_id',
                                 // 'store_photos.photo as store_photo',
                                 'tags.id as tag_id',
@@ -126,6 +126,7 @@ class TagMappingRepository extends ResourceRepository
                        ->leftjoin('tags AS tags', 'tags.id', '=', 'tag_mappings.tag_id')
                        ->leftjoin('products AS products', 'products.id', '=', 'tag_mappings.product_id')
                        ->where($column, '=', $id)
+                       ->whereNull('products.deleted_at')
                        ->orderBy('products.name')
                        ->distinct()->get()
                        ->toArray();

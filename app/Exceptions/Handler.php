@@ -6,6 +6,10 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use Auth\Exceptions\AuthException;
+use App\Api\Tag\Exceptions\TagException;
+
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -44,6 +48,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof AuthException) {
+            return $this->exceptionResponse($exception->getMessage(), 401);
+        }
+
+        if ($exception instanceof TagException) {
+            return $this->exceptionResponse($exception->getMessage(), 422);
+        }
         return parent::render($request, $exception);
     }
 
@@ -57,9 +68,22 @@ class Handler extends ExceptionHandler
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
-            return response()->json(['error' => 'Unauthenticated.'], 401);
+            return response()->json(['message' => 'Unauthenticated.', 'status_code' => 401], 401);
         }
 
         return redirect()->guest(route('login'));
+    }
+
+    /**
+     * Exception Response
+     * 
+     * @param  $message
+     * @param  $details
+     * @param  $statusCode
+     * @return json
+     */
+    private function exceptionResponse($message, $statusCode)
+    {
+        return response()->json(['message' => $message, 'status_code' => $statusCode]);
     }
 }

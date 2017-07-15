@@ -22,6 +22,8 @@ use Config;
 
 use File;
 
+use Auth;
+
 
 class StoreService extends ResourceService
 {
@@ -80,6 +82,7 @@ class StoreService extends ResourceService
         // }
 
         $data['slug'] = str_slug($data['name']);
+        $data['user_id'] = Auth::id();
 
         DB::beginTransaction();
                 
