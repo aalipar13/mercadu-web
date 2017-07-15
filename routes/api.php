@@ -22,12 +22,8 @@ Route::group(['middlware' => 'cors'], function()
     // Authentication
     Route::group(['namespace' => 'Api\Customer\Auth\Controllers'], function()
     {
-        // Route::group(['prefix' => 'customer'], function()
-        // {
-            Route::post('/login', ['as' => 'api.login', 'uses' => 'CustomerAuthController@authenticate']);
-
-            Route::post('/logout', ['as' => 'api.logout', 'uses' => 'CustomerAuthController@logout']);
-        // });
+        Route::post('/login', ['as' => 'api.login', 'uses' => 'CustomerAuthController@login']);
+        Route::post('/logout', ['as' => 'api.logout', 'uses' => 'CustomerAuthController@logout']);
     });
 
     // Registration
