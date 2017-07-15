@@ -1,9 +1,9 @@
 <?php namespace App\Api\UserDetail\Controllers;
 
 
-use App\Base\BaseRequest;
-
 use App\Api\UserDetail\Services\UserDetailService;
+
+use App\Base\BaseRequest;
 
 use Resource\Controllers\ResourceController;
 use Resource\Repositories\ResourceRepository;
@@ -40,5 +40,4 @@ class UserDetailController extends ResourceController
     {
         return $this->success($this->service->getAccountInfoById($id));
     }
-
 }

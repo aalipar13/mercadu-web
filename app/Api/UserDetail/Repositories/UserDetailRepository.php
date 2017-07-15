@@ -5,6 +5,7 @@ use App\Common\Models\UserDetail;
 
 use Resource\Repositories\ResourceRepository;
 
+
 class UserDetailRepository extends ResourceRepository
 {
     /**
