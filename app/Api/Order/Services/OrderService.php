@@ -19,6 +19,14 @@ use Auth;
 class OrderService extends ResourceService
 {
     /**
+     * @return OrderRepository
+     */
+    public function repository()
+    {
+        return new OrderRepository();
+    }
+
+    /**
      * @return CartService
      */
     public function cartService()
@@ -63,13 +71,13 @@ class OrderService extends ResourceService
         $userDetail = $this->userDetailService()->getByUserId($userId);
 
         $orderData = [
-                        // 'customer_id' => $userDetail['user_id'],
-                        'merchant_id' => 3,
-                        'first_name' => $userDetail['first_name'],
-                        'last_name' => $userDetail['last_name'],
-                        'email' => $userDetail['email'],
-                        'mobile' => $userDetail['mobile']
-                     ];
+            'customer_id' => $userDetail['user_id'],
+            'merchant_id' => 3,
+            'first_name' => $userDetail['first_name'],
+            'last_name' => $userDetail['last_name'],
+            'email' => $userDetail['email'],
+            'mobile' => $userDetail['mobile']
+         ];
 
         foreach ($cartDetails['details'] as $details) {
             $orderDetailData['product_id'] = $details['product_id'];
@@ -82,13 +90,13 @@ class OrderService extends ResourceService
 
         $orderData['total'] = $total;
 
-        $orderResult = $this->create($userDetail);
+        $orderResult = $this->create($orderData);
+        
+        for ($i=0; $i < count($orderDetailData); $i++) {
+            $this->orderDetailService()->create($orderDetailData[$i]);
+        }
 
-        // for ($i=0; $i < count($orderDetailData); $i++) { 
-        //     $this->orderDetailService()->create($orderDetailData[$i]);
-        // }
-
-        // return $this->repository()->fetchOrderWithDetails($orderResult['id']);
+        return $this->repository()->fetchOrderWithDetails($orderResult['id']);
 
     }
 }

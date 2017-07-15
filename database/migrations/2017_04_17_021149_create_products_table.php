@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('name', 60)->nullable();
             $table->string('description', 1000)->nullable();
             $table->string('photo', 70)->nullable();
-            $table->enum('type', ['simple', 'group', 'external', 'variable']);
+            $table->enum('type', ['simple', 'group', 'external', 'variable', 'bid']);
             $table->string('code');
             $table->integer('quantity')->nullable();
             $table->enum('should_manage_stock', ['yes', 'no']);

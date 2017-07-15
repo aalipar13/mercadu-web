@@ -1,11 +1,10 @@
-<?php
+<?php namespace App\Common\Models;
 
-namespace App\Common\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Base\BaseModel;
 // use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CartDetail extends Model
+class CartDetail extends BaseModel
 {
     // use SoftDeletes;
 
